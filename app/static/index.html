@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ramayana | Local Scripture Chat</title>
+    <style>
+      :root {
+        color-scheme: dark;
+
+        --gold: #dba747;
+        --gold-light: #ffe3a0;
+        --gold-bright: #fff0bd;
+        --gold-dark: #87501b;
+        --bronze: #6d401b;
+
+        --ink: #f8e9c9;
+        --muted: #bca47e;
+
+        --bg: #100b07;
+        --panel: #19110a;
+        --panel-light: #24170c;
+
+        --line: rgba(219, 167, 71, 0.5);
+      }
+
+      /* GLOBAL */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        position: relative;
+        isolation: isolate;
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+
+        background:
+          radial-gradient(ellipse at 50% 0%, #573719 0%, transparent 48%),
+          radial-gradient(ellipse at 50% 70%, #24150a, transparent 65%), #090705;
+
+        font-family: Georgia, "Times New Roman", serif;
+        overflow-x: hidden;
+      }
+
+      /* Ancient engraved background */
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+
+        background:
+          repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 8px,
+            rgba(222, 166, 72, 0.018) 9px,
+            transparent 10px
+          ),
+          radial-gradient(
+            circle at center,
+            transparent 0 180px,
+            rgba(214, 159, 66, 0.045) 181px,
+            transparent 183px
+          );
+
+        opacity: 0.8;
+      }
+
+      /* MAIN */
+
+      main {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 65px 0 75px;
+      }
+
+      /* HEADER */
+
+      header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 25px;
+
+        padding-bottom: 36px;
+
+        border-bottom: 2px solid var(--gold-dark);
+      }
+
+      /* Ornamental divider */
+
+      header::after {
+        content: "✦";
+        position: absolute;
+        left: 50%;
+        bottom: -12px;
+        transform: translateX(-50%);
+
+        color: var(--gold-light);
+        font-size: 20px;
+
+        text-shadow: 0 0 15px var(--gold);
+      }
+
+      /* EYEBROW */
+
+      .eyebrow {
+        margin-bottom: 20px;
+
+        color: var(--gold);
+
+        font:
+          700 0.72rem system-ui,
+          sans-serif;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+
+      /* MAIN TITLE */
+
+      h1 {
+        margin: 0;
+        max-width: 800px;
+
+        font-size: clamp(3.2rem, 7vw, 6.5rem);
+        line-height: 0.95;
+        font-weight: 500;
+        letter-spacing: -0.045em;
+
+        background: linear-gradient(
+          180deg,
+          #fff3ca 0%,
+          #eec36e 25%,
+          #b87927 52%,
+          #ffe4a0 73%,
+          #a56620 100%
+        );
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+
+        filter: drop-shadow(0 3px 3px #000);
+      }
+
+      /* STATUS */
+
+      .status {
+        max-width: 260px;
+
+        color: var(--gold-light);
+
+        font:
+          0.78rem/1.7 system-ui,
+          sans-serif;
+        text-align: right;
+      }
+
+      /* WORKSPACE */
+
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 24px;
+
+        padding-top: 38px;
+      }
+
+      /* GOLDEN METAL PANELS */
+
+      .chat,
+      aside {
+        position: relative;
+
+        background:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(141, 91, 33, 0.12),
+            transparent 65%
+          ),
+          linear-gradient(145deg, #302010, #120d08 45%, #25170b);
+
+        border: 2px solid #9e702e;
+
+        box-shadow:
+          inset 0 0 0 2px #261709,
+          inset 0 0 0 4px rgba(218, 169, 79, 0.28),
+          inset 0 0 35px rgba(0, 0, 0, 0.75),
+          0 12px 40px #000;
+      }
+
+      /* DOUBLE CARVED BORDER */
+
+      .chat::before,
+      aside::before {
+        content: "";
+        position: absolute;
+        inset: 7px;
+
+        border: 1px solid rgba(240, 192, 105, 0.48);
+
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Decorative metallic corner ornaments */
+
+      .chat::after,
+      aside::after {
+        content: "❖";
+        position: absolute;
+        top: 8px;
+        right: 12px;
+
+        color: var(--gold-light);
+        font-size: 17px;
+
+        text-shadow: 0 0 10px var(--gold);
+        pointer-events: none;
+      }
+
+      .chat {
+        min-height: 650px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* MESSAGES */
+
+      #messages {
+        flex: 1;
+        padding: 35px 30px;
+
+        overflow-y: auto;
+        scroll-behavior: smooth;
+
+        background: radial-gradient(
+          circle at 50% 55%,
+          rgba(180, 124, 42, 0.07),
+          transparent 55%
+        );
+      }
+
+      #messages::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      #messages::-webkit-scrollbar-track {
+        background: #120c07;
+      }
+
+      #messages::-webkit-scrollbar-thumb {
+        background: linear-gradient(#ffe2a0, #99601f);
+      }
+
+      /* MESSAGE ANIMATION */
+
+      .message {
+        max-width: 86%;
+        margin-bottom: 28px;
+
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+
+        line-height: 1.8;
+        font-size: 1rem;
+
+        animation: appear 0.35s ease both;
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* USER MESSAGE */
+
+      .message.user {
+        margin-left: auto;
+        padding: 17px 21px;
+
+        color: #241507;
+
+        background: linear-gradient(135deg, #ffe6aa, #d49a40 48%, #f5cf7d);
+
+        border: 1px solid #ffe5a5;
+
+        box-shadow:
+          inset 0 1px 3px rgba(255, 255, 255, 0.55),
+          inset 0 -3px 5px rgba(105, 58, 12, 0.3),
+          0 5px 15px rgba(0, 0, 0, 0.5);
+
+        border-radius: 3px 12px 3px 12px;
+      }
+
+      /* ASSISTANT MESSAGE */
+
+      .message.assistant {
+        padding: 20px 22px;
+
+        color: #f7e7c8;
+
+        background: linear-gradient(
+          135deg,
+          rgba(73, 48, 22, 0.55),
+          rgba(17, 12, 7, 0.95)
+        );
+
+        border: 1px solid rgba(210, 158, 73, 0.3);
+        border-left: 3px solid var(--gold);
+
+        box-shadow:
+          inset 0 0 20px rgba(198, 137, 47, 0.06),
+          0 4px 15px rgba(0, 0, 0, 0.3);
+
+        border-radius: 2px 8px 8px 2px;
+      }
+
+      /* LABELS */
+
+      .label {
+        display: block;
+        margin-bottom: 12px;
+
+        color: var(--gold-light);
+
+        font:
+          700 0.68rem system-ui,
+          sans-serif;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .message.user .label {
+        color: #76501e;
+      }
+
+      /* INPUT SECTION */
+
+      form {
+        display: flex;
+        gap: 12px;
+
+        padding: 20px;
+
+        background: linear-gradient(180deg, #241609, #100b07);
+
+        border-top: 2px solid #9c6929;
+      }
+
+      /* INPUT */
+
+      input {
+        flex: 1;
+        min-width: 0;
+
+        padding: 16px 18px;
+
+        color: var(--gold-light);
+
+        background: linear-gradient(145deg, #0d0905, #241609);
+
+        border: 1px solid #a87531;
+        border-radius: 3px;
+
+        outline: none;
+
+        font:
+          1rem Georgia,
+          serif;
+
+        box-shadow:
+          inset 0 3px 10px #000,
+          0 1px 0 rgba(255, 219, 146, 0.2);
+
+        transition: 0.25s ease;
+      }
+
+      input::placeholder {
+        color: #a38a64;
+      }
+
+      input:focus {
+        border-color: #ffe0a0;
+
+        box-shadow:
+          inset 0 3px 10px #000,
+          0 0 15px rgba(226, 174, 83, 0.24);
+      }
+
+      /* ASK BUTTON */
+
+      button {
+        min-width: 110px;
+        padding: 0 24px;
+
+        color: #281707;
+
+        background: linear-gradient(
+          160deg,
+          #fff0bd 0%,
+          #e7b454 35%,
+          #a76a25 70%,
+          #f2ca7b 100%
+        );
+
+        border: 2px solid #f4d28d;
+        border-radius: 3px;
+
+        font:
+          700 0.8rem system-ui,
+          sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+
+        cursor: pointer;
+
+        box-shadow:
+          inset 0 1px 3px rgba(255, 255, 255, 0.8),
+          inset 0 -3px 5px rgba(77, 40, 7, 0.4),
+          0 4px 15px rgba(0, 0, 0, 0.5);
+
+        transition: 0.25s ease;
+      }
+
+      button:hover:not(:disabled) {
+        filter: brightness(1.2);
+
+        transform: translateY(-2px);
+
+        box-shadow:
+          0 0 20px rgba(255, 197, 89, 0.4),
+          inset 0 1px 4px white;
+      }
+
+      button:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: wait;
+      }
+
+      /* SOURCES SIDEBAR */
+
+      aside {
+        padding: 28px 24px;
+      }
+
+      aside h2 {
+        margin: 0 0 25px;
+
+        font-size: 1.65rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+
+        background: linear-gradient(180deg, #fff0bd, #d69b42, #87501b);
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      /* Ornamental heading divider */
+
+      aside h2::after {
+        content: "✧ ━━━━━━━━━ ✧";
+
+        display: block;
+        margin-top: 12px;
+
+        color: var(--gold);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+      }
+
+      /* SCRIPTURE SOURCES */
+
+      .source {
+        padding: 19px 0;
+
+        border-top: 1px solid rgba(216, 168, 83, 0.3);
+
+        font:
+          0.85rem/1.65 system-ui,
+          sans-serif;
+
+        transition: 0.25s ease;
+      }
+
+      .source:hover {
+        padding-left: 7px;
+      }
+
+      .source strong {
+        display: block;
+
+        color: #eac16f;
+
+        font:
+          700 0.77rem/1.6 system-ui,
+          sans-serif;
+      }
+
+      .source p {
+        margin: 10px 0 0;
+
+        color: #c9b895;
+
+        font:
+          0.87rem/1.8 Georgia,
+          serif;
+      }
+
+      /* SELECTION */
+
+      ::selection {
+        color: #170d04;
+        background: #edbd68;
+      }
+
+      /* ACCESSIBILITY */
+
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid #ffe7ac;
+        outline-offset: 4px;
+      }
+
+      /* TABLET */
+
+      @media (max-width: 900px) {
+        main {
+          width: min(100% - 36px, 760px);
+        }
+
+        .workspace {
+          grid-template-columns: minmax(0, 1fr) 280px;
+          gap: 18px;
+        }
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 760px) {
+        main {
+          width: calc(100% - 24px);
+          padding: 35px 0 45px;
+        }
+
+        header {
+          display: block;
+          padding-bottom: 25px;
+        }
+
+        h1 {
+          font-size: clamp(2.8rem, 12vw, 4.5rem);
+        }
+
+        .status {
+          margin-top: 18px;
+          text-align: left;
+        }
+
+        .workspace {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding-top: 25px;
+        }
+
+        .chat {
+          min-height: 550px;
+        }
+
+        #messages {
+          padding: 25px 16px;
+        }
+
+        .message {
+          max-width: 95%;
+          font-size: 0.94rem;
+        }
+
+        .message.user,
+        .message.assistant {
+          padding: 15px 16px;
+        }
+
+        form {
+          gap: 8px;
+          padding: 13px;
+        }
+
+        input {
+          padding: 13px 11px;
+          font-size: 0.88rem;
+        }
+
+        button {
+          min-width: 80px;
+          padding: 0 12px;
+          font-size: 0.72rem;
+        }
+
+        aside {
+          padding: 24px 20px;
+        }
+      }
+
+      /* SMALL MOBILE */
+
+      @media (max-width: 380px) {
+        main {
+          width: calc(100% - 18px);
+        }
+
+        h1 {
+          font-size: 2.65rem;
+        }
+
+        button {
+          min-width: 70px;
+          padding: 0 8px;
+        }
+      }
+
+      /* REDUCED MOTION */
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <div class="eyebrow">A local scripture companion</div>
+          <h1>Ask the Ramayana.</h1>
+        </div>
+        <div id="status" class="status">Checking local index...</div>
+      </header>
+      <section class="workspace">
+        <section class="chat" aria-label="Ramayana chat">
+          <div id="messages">
+            <div class="message assistant">
+              <span class="label">Local guide</span>Ask about a character,
+              event, teaching, or verse. Answers are grounded in the indexed
+              corpus and show their sources here.
+            </div>
+          </div>
+          <form id="chat-form">
+            <input
+              id="question"
+              autocomplete="off"
+              placeholder="What virtues of Rama are described?"
+              required
+            /><button id="send" type="submit">Ask</button>
+          </form>
+        </section>
+        <aside>
+          <h2>Sources</h2>
+          <div id="sources">
+            Relevant passages will appear after a question.
+          </div>
+        </aside>
+      </section>
+    </main>
+    <script>
+      const form = document.querySelector("#chat-form");
+      const input = document.querySelector("#question");
+      const send = document.querySelector("#send");
+      const messages = document.querySelector("#messages");
+      const sources = document.querySelector("#sources");
+      const status = document.querySelector("#status");
+      const addMessage = (kind, text) => {
+        const node = document.createElement("div");
+        node.className = `message ${kind}`;
+        node.innerHTML = `<span class="label">${kind === "user" ? "You" : "Ramayana guide"}</span>${text.replaceAll("&", "&amp;").replaceAll("<", "&lt;")}`;
+        messages.append(node);
+        messages.scrollTop = messages.scrollHeight;
+      };
+      fetch("/api/health")
+        .then((r) => r.json())
+        .then((data) => {
+          status.textContent = `${data.indexed_verses.toLocaleString()} verses indexed · ${data.ollama_model}`;
+        })
+        .catch(() => {
+          status.textContent = "Local API unavailable";
+        });
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const question = input.value.trim();
+        if (!question) return;
+        addMessage("user", question);
+        input.value = "";
+        send.disabled = true;
+        send.textContent = "...";
+        try {
+          const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question }),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Request failed");
+          addMessage("assistant", data.answer);
+          sources.innerHTML = data.sources.length
+            ? data.sources
+                .map(
+                  (item) =>
+                    `<div class="source"><strong>${item.book} · Sarga ${item.sarga} · ${item.verse_id}</strong><p>${(item.prose || item.gloss || item.devanagari).replaceAll("&", "&amp;").replaceAll("<", "&lt;")}</p></div>`,
+                )
+                .join("")
+            : "No supporting passages found.";
+        } catch (error) {
+          addMessage("assistant", error.message);
+        } finally {
+          send.disabled = false;
+          send.textContent = "Ask";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,239 @@
+body {
+	background-image: url('https://valmikiramayan.net/aranya/rbg.jpg');
+	background-repeat: repeat;
+	background-attachment: scroll;
+}
+.SanSloka {
+	font-size: 1.3em;
+	color: #5B0000;
+	font-family: "Sanskrit 2003";
+	text-align: center;
+	line-height : 150%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+.RomSloka {
+		font-size: 1.125em;
+	color: #5B0000;
+	font-family: "URW Palladio ITU";
+	text-align: center;
+	letter-spacing : 1px;
+	margin-top: 1%;
+	line-height : 125%;
+	margin-bottom: 1%;
+}
+.ItrSloka {
+	font-size: 14pt;
+	color: #5B0000;
+	font-family: Times New Roman;
+	text-align: center;
+	margin-top: 1%;
+	margin-bottom: 0.5%;
+	letter-spacing : 1px;
+	word-spacing : 1px;
+}
+.pratipada {
+	font-family: Times New Roman, Georgia;
+	font-size: 1.1em;
+	text-indent: 50px;
+	letter-spacing: 1px;
+	text-align: Left;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+.tat {
+	font-size: 1.2em;
+	font-family: Times New Roman, Georgia;
+	font-weight: normal;
+	color: #000000;
+	text-align: Left;
+	text-indent: 50px;
+	margin-top: 0.5%;
+	margin-bottom: 1%;
+}
+
+.comment {
+font-size: 1.05em;
+	font-family: Georgia;
+	color: #000080;
+	text-align: Left;
+	text-indent: 50px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.verloc {
+	font-family: Times;
+	background-color: #C0C0C0;
+	text-align: Right;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing : -1px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin: 0px;
+	border: none;
+}
+
+.verloc {
+	font-family: Times;
+	background-color: #C0C0C0;
+	text-align: Right;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing : -1px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin: 0px;
+	border: none;
+}
+.smRS {
+	text-align: Center;
+	margin-top : 0.5%;
+	margin-bottom : 0.5%;
+}
+.smSS {
+	font-size: 18px;
+	color: #CC3300;
+	font-family: "Sanskrit 2003";
+	text-align: Center;
+	font-weight : 500;
+	margin-top : 0.5%;
+	margin-bottom : 0.5%;
+}
+.smItS {
+	font-size: 1em;
+	color: #800000;
+	font-family: Times New Roman;
+	text-align: Center;
+	margin-top : 0.5%;
+	margin-bottom : 0.5%;
+	letter-spacing: 2px;
+}
+.ardham {
+	font-family: Times New Roman;
+	font-size: 16px;
+	color: #800000;
+	text-align: Left;
+	text-indent: 50px;
+	font-weight: 700;
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
+}
+.txt {
+	font-family: Times New Roman;
+	font-size: 1.2em;
+	color: #000000;
+	text-align: Left;
+	text-indent: 50px;
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
+}
+.prati {
+	font-size: 15px;
+	font-family: Times New Roman;
+	font-weight: 700;
+	color: #000000;
+	text-align: Left;
+	text-indent: 50px;
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
+}
+strong {
+	color: #800000;
+}
+em {
+	color: #750000;
+	font-style: normal;
+}
+.emph {
+	color: #993333;
+}
+h1 {
+	font-family: Times New Roman;
+	color: #800080;
+	text-align: center;
+}
+h2 {
+	font-family: Times New Roman;
+	text-align: center;
+}
+h3 {
+	font-family: Times New Roman;
+	text-align: center;
+	color: #800000;
+	font-size: large;
+}
+h4 {
+	font-family: Times New Roman;
+	text-align: center;
+	color: #000000;
+	font-size: 19px;
+	font-weight: normal;
+	height: 25px;
+}
+.tild {
+	font-family: Times New Roman;
+	font-size: 15px;
+	color: #0000FF;
+	text-align: Center;
+	font-weight: bold;
+}
+/*=================footer style declarations===================*/
+#centeredmenu {
+	float: left;
+	width: 100%;
+	background: #fff;
+	overflow: hidden;
+	position: relative;
+	font-family: "Times New Roman";
+	font-size: 18px;
+}
+#centeredmenu ul {
+	clear: left;
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	left: 50%;
+	text-align: center;
+}
+#centeredmenu ul li {
+	display: block;
+	float: left;
+	list-style: none;
+	position: relative;
+	right: 50%;
+	color: red;
+	margin: 0 0 0 1px;
+	padding: 3px 10px;
+	font-weight: 600;
+	line-height: 1.3em;
+	border: 1px #CC0000 groove;
+	background: #FCF7D6;
+}
+#centeredmenu ul li a {
+	color: #000000;
+	text-decoration: none;
+}
+#centeredmenu ul li a:hover {
+	color: #FFFFFF;
+	background: #3366CC;
+}
+#centeredmenu ul li a.nav {
+	font-weight: normal;
+	color: #000000;
+}
+#centeredmenu ul li a.nav:hover {
+	font-weight: normal;
+	color: #ffffff;
+	background: RED;
+}
+#centeredmenu ul li a.main {
+	font-weight: normal;
+}
+#centeredmenu ul li a.chapter {
+	font-weight: 600;
+}
+/*=============end of ====footer style declarations===================*/
