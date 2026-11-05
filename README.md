@@ -1,4 +1,4 @@
-# Local Ramayana Chat
+# Ramayana AI (local)
 
 It is based on the foundation of ollama, the dataset used are the original scriptures of Ramayana taken from Vedic websites, the chatbot is capable of running locally and with unlimited questions. This entire project is the product of "Agentic coding" which has been far more feasible and faster to train and create AIs. However, for the authenticity and less hallucinations the RAG model only answers via the datasets provided, and its results might vary from the stories you heard but whatever it answers comes straight from the scriptures and the bot also provides evidences in the right panel (from the scriptures).
 
@@ -75,5 +75,3 @@ The fixed retrieval evaluation can be run with:
 ```bash
 PYTHONPATH=app .venv/bin/python -m ramayana.evaluate
 ```
-# RamayanaAI
-# RamayanaAI
